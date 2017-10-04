@@ -6,6 +6,8 @@ import es.upm.miw.apaw.driver.api.resources.exceptions.RequestInvalidException;
 import es.upm.miw.apaw.driver.http.HttpRequest;
 import es.upm.miw.apaw.driver.http.HttpResponse;
 import es.upm.miw.apaw.driver.http.HttpStatus;
+import es.upm.miw.apaw.theme.api.resources.ThemeResource;
+import es.upm.miw.apaw.theme.api.resources.VoteResource;
 
 public class Dispatcher {
 
@@ -28,6 +30,12 @@ public class Dispatcher {
 
     public void doPost(HttpRequest request, HttpResponse response) {
         try {
+            if (request.isEqualsPath(DriverResource.DRIVERS)) {
+                driverResource.createDriver(request.getBody());
+                response.setStatus(HttpStatus.CREATED);
+            } else {
+                throw new RequestInvalidException(request.getPath());
+            }
 
         } catch (Exception e) {
             responseError(response, e);
