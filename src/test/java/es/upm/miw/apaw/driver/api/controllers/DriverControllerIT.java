@@ -7,7 +7,17 @@ import static org.junit.Assert.assertArrayEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-public class DriverControllerIT {
+import es.upm.miw.apaw.driver.api.daos.DaoFactory;
+import es.upm.miw.apaw.driver.api.daos.memory.DaoMemoryFactory;
 
+public class DriverControllerIT {
+    private DriverController driverController;
+
+    @Before
+    public void before() {
+        DaoFactory.setFactory(new DaoMemoryFactory());
+        driverController = new DriverController();
+        driverController.createDriver(1);
+    }
 
 }

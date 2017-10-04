@@ -28,6 +28,12 @@ public class Dispatcher {
 
     public void doPost(HttpRequest request, HttpResponse response) {
         try {
+            if (request.isEqualsPath(DriverResource.DRIVERS)) {
+                driverResource.createDriver(request.getBody());
+                response.setStatus(HttpStatus.CREATED);
+            } else {
+                throw new RequestInvalidException(request.getPath());
+            }
 
         } catch (Exception e) {
             responseError(response, e);
