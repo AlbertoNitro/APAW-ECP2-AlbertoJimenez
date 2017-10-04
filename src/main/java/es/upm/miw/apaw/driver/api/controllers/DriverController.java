@@ -11,5 +11,10 @@ import es.upm.miw.apaw.driver.api.dtos.DriverCarListDto;
 
 public class DriverController {
 
+    public void createDriver(String driverId) {
+        // TODO Auto-generated method stub
+        
+    }
+
 
 }
