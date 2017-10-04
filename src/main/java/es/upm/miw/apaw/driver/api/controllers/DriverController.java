@@ -11,10 +11,12 @@ import es.upm.miw.apaw.driver.api.dtos.DriverCarListDto;
 
 public class DriverController {
 
-    public void createDriver(String driverId) {
-        // TODO Auto-generated method stub
-        
+    public void createDriver(int driverId) {
+        DaoFactory.getFactory().getDriverDao().create(new Driver(driverId));
     }
 
+    private boolean existThemeId(int driverId) {
+        return DaoFactory.getFactory().getDriverDao().read(driverId) != null;
+    }
 
 }

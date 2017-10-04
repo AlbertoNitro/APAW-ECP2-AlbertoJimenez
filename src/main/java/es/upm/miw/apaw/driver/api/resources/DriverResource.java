@@ -12,12 +12,13 @@ public class DriverResource {
 
     public void createDriver(String driverId) throws DriverIdInvalidException {
         this.validateId(driverId);
-        new DriverController().createDriver(driverId);
+        int id = Integer.parseInt(driverId);
+        new DriverController().createDriver(id);
     }
 
     private void validateId(String driverId) throws DriverIdInvalidException {
         try {
-            driverId = String.valueOf(driverId);
+            Integer.parseInt(driverId);
         } catch (Exception e) {
             throw new DriverIdInvalidException(driverId);
         }
