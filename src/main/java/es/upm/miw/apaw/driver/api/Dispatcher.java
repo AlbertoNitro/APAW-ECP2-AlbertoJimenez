@@ -9,7 +9,7 @@ import es.upm.miw.apaw.driver.http.HttpStatus;
 
 public class Dispatcher {
 
-    private DriverResource driverResource = new DriverResource();
+    private DriverResource driverResource = new DriverResource(); 
 
     private CarResource carResource = new CarResource();
 
@@ -37,8 +37,8 @@ public class Dispatcher {
     public void doPut(HttpRequest request, HttpResponse response) {
         try {
 
-        } catch (Exception e) {
-            responseError(response, e);
+        } catch (Exception ex) {
+            responseError(response, ex);
         }
     }
 
