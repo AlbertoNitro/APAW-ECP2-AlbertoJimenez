@@ -6,8 +6,6 @@ import es.upm.miw.apaw.driver.api.resources.exceptions.RequestInvalidException;
 import es.upm.miw.apaw.driver.http.HttpRequest;
 import es.upm.miw.apaw.driver.http.HttpResponse;
 import es.upm.miw.apaw.driver.http.HttpStatus;
-import es.upm.miw.apaw.theme.api.resources.ThemeResource;
-import es.upm.miw.apaw.theme.api.resources.VoteResource;
 
 public class Dispatcher {
 
