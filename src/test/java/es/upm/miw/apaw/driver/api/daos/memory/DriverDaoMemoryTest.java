@@ -28,5 +28,15 @@ public class DriverDaoMemoryTest {
     public void testReadNonExistId() {
         assertNull(DaoFactory.getFactory().getDriverDao().read(2));
     }
+    
+    @Test
+    public void testUpdatePhoneDriver() {
+        assertEquals(665129265, DaoFactory.getFactory().getDriverDao().updatePhone(1, 665129265).getPhone());
+    }
+
+    @Test
+    public void testUpdatePhoneDriverNonExistId() {
+        assertNull(DaoFactory.getFactory().getDriverDao().updatePhone(67, 665129265));
+    }
 
 }
