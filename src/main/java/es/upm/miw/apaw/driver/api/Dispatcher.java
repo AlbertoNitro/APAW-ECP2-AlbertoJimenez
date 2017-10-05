@@ -9,7 +9,7 @@ import es.upm.miw.apaw.driver.http.HttpStatus;
 
 public class Dispatcher {
 
-    private DriverResource driverResource = new DriverResource(); 
+    private DriverResource driverResource = new DriverResource();
 
     private CarResource carResource = new CarResource();
 
@@ -21,7 +21,6 @@ public class Dispatcher {
     public void doGet(HttpRequest request, HttpResponse response) {
         try {
             if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
-                System.out.println("LEO : " + request.paths()[1]);
                 response.setBody(driverResource.readDriver(Integer.valueOf(request.paths()[1])).toString());
             } else {
                 throw new RequestInvalidException(request.getPath());
@@ -46,16 +45,16 @@ public class Dispatcher {
     }
 
     public void doPut(HttpRequest request, HttpResponse response) {
-        try {
-
-        } catch (Exception ex) {
-            responseError(response, ex);
-        }
+        responseError(response, new RequestInvalidException(request.getPath()));
     }
 
     public void doPatch(HttpRequest request, HttpResponse response) {
         try {
-
+            if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
+                response.setBody(driverResource.updatePhoneDriver(Integer.valueOf(request.paths()[1])).toString());
+            } else {
+                throw new RequestInvalidException(request.getPath());
+            }
         } catch (Exception e) {
             responseError(response, e);
         }

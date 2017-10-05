@@ -32,4 +32,9 @@ public class DriverResource {
         return optional.orElseThrow(() -> new DriverIdNotFoundException(Integer.toString(driverId)));
     }
 
+    public Object updatePhoneDriver(Integer valueOf) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
