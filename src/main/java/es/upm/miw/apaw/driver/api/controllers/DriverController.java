@@ -19,4 +19,9 @@ public class DriverController {
         return DaoFactory.getFactory().getDriverDao().read(driverId) != null;
     }
 
+    public Optional<DriverDto> readDriver(int driverId) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
