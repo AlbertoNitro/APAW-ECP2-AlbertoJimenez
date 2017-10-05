@@ -51,7 +51,9 @@ public class Dispatcher {
     public void doPatch(HttpRequest request, HttpResponse response) {
         try {
             if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
-                response.setBody(driverResource.updatePhoneDriver(Integer.valueOf(request.paths()[1])).toString());
+                int driverId = Integer.valueOf(request.paths()[1]);
+                long phoneDriver = Long.valueOf(request.getBody());     
+                response.setBody(driverResource.updatePhoneDriver(driverId, phoneDriver).toString());
             } else {
                 throw new RequestInvalidException(request.getPath());
             }
