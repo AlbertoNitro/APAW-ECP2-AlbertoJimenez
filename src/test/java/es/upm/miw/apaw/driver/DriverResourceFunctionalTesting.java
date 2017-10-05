@@ -14,6 +14,7 @@ import es.upm.miw.apaw.driver.http.HttpException;
 import es.upm.miw.apaw.driver.http.HttpMethod;
 import es.upm.miw.apaw.driver.http.HttpRequest;
 import es.upm.miw.apaw.driver.http.HttpRequestBuilder;
+import es.upm.miw.apaw.theme.api.resources.ThemeResource;
 
 public class DriverResourceFunctionalTesting {
 
@@ -42,5 +43,13 @@ public class DriverResourceFunctionalTesting {
     public void testCreateWithoutDriverId() {
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(DriverResource.DRIVERS).build();
         new HttpClientService().httpRequest(request);
+    }
+    
+    @Test
+    public void testReadDriver() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
+        assertEquals("{\"id\":1\"}", new HttpClientService().httpRequest(request).getBody());
+
     }
 }
