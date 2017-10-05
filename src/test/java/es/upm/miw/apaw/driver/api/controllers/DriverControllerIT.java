@@ -2,7 +2,6 @@ package es.upm.miw.apaw.driver.api.controllers;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +10,7 @@ import es.upm.miw.apaw.driver.api.daos.DaoFactory;
 import es.upm.miw.apaw.driver.api.daos.memory.DaoMemoryFactory;
 
 public class DriverControllerIT {
+    
     private DriverController driverController;
 
     @Before
@@ -20,4 +20,13 @@ public class DriverControllerIT {
         driverController.createDriver(1);
     }
 
+    @Test
+    public void testReadDriver() {
+        assertEquals(1, driverController.readDriver(1).get().getId());
+    }
+
+    @Test
+    public void testReadDriverNonExistId() {
+        assertFalse(driverController.readDriver(2).isPresent());
+    }
 }

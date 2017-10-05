@@ -20,7 +20,12 @@ public class Dispatcher {
 
     public void doGet(HttpRequest request, HttpResponse response) {
         try {
-
+            if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
+                System.out.println("LEO : " + request.paths()[1]);
+                response.setBody(driverResource.readDriver(Integer.valueOf(request.paths()[1])).toString());
+            } else {
+                throw new RequestInvalidException(request.getPath());
+            }
         } catch (Exception e) {
             responseError(response, e);
         }
