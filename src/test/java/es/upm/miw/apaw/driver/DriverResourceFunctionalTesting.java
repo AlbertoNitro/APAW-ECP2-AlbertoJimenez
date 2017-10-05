@@ -8,7 +8,7 @@ import org.junit.Test;
 import es.upm.miw.apaw.driver.api.daos.DaoFactory;
 import es.upm.miw.apaw.driver.api.daos.memory.DaoMemoryFactory;
 import es.upm.miw.apaw.driver.api.resources.DriverResource;
-import es.upm.miw.apaw.driver.api.resources.CarResource;
+import es.upm.miw.apaw.driver.api.resources.exceptions.DriverIdNotFoundException;
 import es.upm.miw.apaw.driver.http.HttpClientService;
 import es.upm.miw.apaw.driver.http.HttpException;
 import es.upm.miw.apaw.driver.http.HttpMethod;
@@ -49,6 +49,14 @@ public class DriverResourceFunctionalTesting {
         this.createDriver();
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
         assertEquals("{\"id\":1\"}", new HttpClientService().httpRequest(request).getBody());
-
     }
+    
+    @Test(expected = HttpException.class)
+    public void testReadDriverIdEmpty() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+    
+    
 }
