@@ -24,4 +24,12 @@ public class DriverController {
         }
     }
 
+    public Optional<DriverDto> updatePhoneDriver(Integer driverId, long phoneDriver) {
+        if (existDriverId(driverId)) {
+            return Optional.of(new DriverDto(DaoFactory.getFactory().getDriverDao().updatePhone(driverId, phoneDriver)));
+        } else {
+            return Optional.empty();
+        }
+    }
+
 }

@@ -32,4 +32,10 @@ public class DriverResource {
         return optional.orElseThrow(() -> new DriverIdNotFoundException(Integer.toString(driverId)));
     }
 
+    public DriverDto updatePhoneDriver(Integer driverId, long phoneDriver) throws DriverIdNotFoundException {
+        // {"error":"PhoneInvalidException"}
+        Optional<DriverDto> optional = new DriverController().updatePhoneDriver(driverId, phoneDriver);
+        return optional.orElseThrow(() -> new DriverIdNotFoundException(Integer.toString(driverId)));
+    }
+
 }

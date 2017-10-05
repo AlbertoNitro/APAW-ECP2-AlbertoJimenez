@@ -48,13 +48,44 @@ public class DriverResourceFunctionalTesting {
     public void testReadDriver() {
         this.createDriver();
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
-        assertEquals("{\"id\":1\"}", new HttpClientService().httpRequest(request).getBody());
+        assertEquals("{\"id\":1,\"phone\":\"0\"}", new HttpClientService().httpRequest(request).getBody());
     }
     
     @Test(expected = HttpException.class)
     public void testReadDriverIdEmpty() {
         this.createDriver();
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+    
+    @Test(expected = HttpException.class)
+    public void testUpdatePhoneDriverIdNotFound() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("33").body("665129265").build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+    
+    /*
+    @Test(expected = HttpException.class)
+    public void testUpdatePhoneDriverEmpty() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").body("").build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+    */
+    
+    
+    @Test(expected = HttpException.class)
+    public void testUpdatePhoneDriverInvalid() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").body("fgfgfghghj").build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+    
+    @Test(expected = HttpException.class)
+    public void testUpdatePhoneDriver() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").body("665129265").build();
         new HttpClientService().httpRequest(request).getBody();
     }
     

@@ -29,4 +29,14 @@ public class DriverControllerIT {
     public void testReadDriverNonExistId() {
         assertFalse(driverController.readDriver(2).isPresent());
     }
+    
+    @Test
+    public void testUpdatePhoneDriver() {
+        assertEquals(665129265, driverController.updatePhoneDriver(1, 665129265).get().getPhone());
+    }
+    
+    @Test
+    public void testUpdatePhoneDriverNonExistId() {
+        assertFalse(driverController.updatePhoneDriver(56, 665129265).isPresent());
+    }
 }

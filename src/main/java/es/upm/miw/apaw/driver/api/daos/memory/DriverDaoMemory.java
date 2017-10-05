@@ -22,4 +22,12 @@ public class DriverDaoMemory extends GenericDaoMemory<Driver> implements DriverD
 
     }
 
+    @Override
+    public Driver updatePhone(int driverId, long phoneDriver) {
+        Driver driver = this.read(driverId);
+        driver.setPhone(phoneDriver);
+        this.update(driver);
+        return driver;
+    }
+
 }
