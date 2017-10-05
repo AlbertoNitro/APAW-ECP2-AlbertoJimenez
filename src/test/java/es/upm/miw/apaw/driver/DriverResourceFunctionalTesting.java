@@ -58,5 +58,33 @@ public class DriverResourceFunctionalTesting {
         new HttpClientService().httpRequest(request).getBody();
     }
     
+    @Test(expected = HttpException.class)
+    public void testUpdatePhoneDriverIdNotFound() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("33").body("665129265").build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+    
+    @Test(expected = HttpException.class)
+    public void testUpdatePhoneDriverEmpty() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").body("").build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+    
+    @Test(expected = HttpException.class)
+    public void testUpdatePhoneDriverInvalid() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").body("fgfgfghghj").build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+    
+    @Test(expected = HttpException.class)
+    public void testUpdatePhoneDriver() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").body("665129265").build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+    
     
 }
