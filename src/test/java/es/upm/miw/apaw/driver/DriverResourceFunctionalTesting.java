@@ -14,7 +14,6 @@ import es.upm.miw.apaw.driver.http.HttpException;
 import es.upm.miw.apaw.driver.http.HttpMethod;
 import es.upm.miw.apaw.driver.http.HttpRequest;
 import es.upm.miw.apaw.driver.http.HttpRequestBuilder;
-import es.upm.miw.apaw.theme.api.resources.ThemeResource;
 
 public class DriverResourceFunctionalTesting {
 
