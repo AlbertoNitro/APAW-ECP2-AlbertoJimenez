@@ -23,6 +23,7 @@ public class Dispatcher {
         try {
             if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
                 response.setBody(driverResource.readDriver(Integer.valueOf(request.paths()[1])).toString());
+                response.setStatus(HttpStatus.OK);
             } else {
                 throw new RequestInvalidException(request.getPath());
             }
@@ -55,6 +56,7 @@ public class Dispatcher {
                 int driverId = Integer.valueOf(request.paths()[1]);
                 long phoneDriver = Long.valueOf(request.getBody());     
                 response.setBody(driverResource.updatePhoneDriver(driverId, phoneDriver).toString());
+                response.setStatus(HttpStatus.OK);
             } else {
                 throw new RequestInvalidException(request.getPath());
             }
@@ -70,6 +72,9 @@ public class Dispatcher {
                boolean resultado = driverResource.deleteDriver(driverId);
                if (!resultado)
                    throw new DriverIdNotFoundException(Integer.toString(driverId));
+               else {
+                   response.setStatus(HttpStatus.OK);
+               }
             } else {
                 throw new RequestInvalidException(request.getPath());
             }
