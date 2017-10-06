@@ -1,7 +1,6 @@
 package es.upm.miw.apaw.driver.api.daos.memory;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,8 +34,10 @@ public class DriverDaoMemoryTest {
     }
 
     @Test
-    public void testUpdatePhoneDriverNonExistId() {
-        assertNull(DaoFactory.getFactory().getDriverDao().updatePhone(67, 665129265));
+    public void testDeleteDriver() {
+        assertEquals(1, DaoFactory.getFactory().getDriverDao().read(1).getId());
+        DaoFactory.getFactory().getDriverDao().deleteById(1);
+        assertNull(DaoFactory.getFactory().getDriverDao().read(1));
     }
 
 }

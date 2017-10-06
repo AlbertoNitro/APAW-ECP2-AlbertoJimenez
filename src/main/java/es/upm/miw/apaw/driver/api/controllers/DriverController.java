@@ -32,4 +32,13 @@ public class DriverController {
         }
     }
 
+    public boolean deleteDriver(Integer driverId) {
+        if (existDriverId(driverId)) {
+           DaoFactory.getFactory().getDriverDao().deleteById(driverId);
+           return true;
+        } else {
+            return false;
+        }
+    }
+
 }

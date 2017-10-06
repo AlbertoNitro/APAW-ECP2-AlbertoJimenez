@@ -38,4 +38,8 @@ public class DriverResource {
         return optional.orElseThrow(() -> new DriverIdNotFoundException(Integer.toString(driverId)));
     }
 
+    public boolean deleteDriver(Integer driverId) {
+        return new DriverController().deleteDriver(driverId);
+    }
+
 }

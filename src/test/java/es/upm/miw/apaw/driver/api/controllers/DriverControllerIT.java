@@ -1,7 +1,6 @@
 package es.upm.miw.apaw.driver.api.controllers;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,5 +37,15 @@ public class DriverControllerIT {
     @Test
     public void testUpdatePhoneDriverNonExistId() {
         assertFalse(driverController.updatePhoneDriver(56, 665129265).isPresent());
+    }
+    
+    @Test
+    public void testDeleteDriverNonExistId() {
+        assertFalse(driverController.deleteDriver(6778));
+    }
+    
+    @Test
+    public void testDeleteDriver() {
+        assertTrue(driverController.deleteDriver(1));
     }
 }
