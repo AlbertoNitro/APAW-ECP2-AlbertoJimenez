@@ -46,4 +46,18 @@ public class CarResourceFunctionalTesting {
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(CarResource.CARS).build();
         new HttpClientService().httpRequest(request);
     }
+    
+    @Test
+    public void testReadCar() {
+        this.createCar();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(CarResource.CARS).path(CarResource.ID).expandPath("1").build();
+        assertEquals("{\"id\":1,\"model\":\"\"\", \"registration\":\"\"\"\"}", new HttpClientService().httpRequest(request).getBody());
+    }
+
+    @Test(expected = HttpException.class)
+    public void testReadCarIdEmpty() {
+        this.createCar();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(CarResource.CARS).path(CarResource.ID).build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
 }
