@@ -37,6 +37,9 @@ public class Dispatcher {
             if (request.isEqualsPath(DriverResource.DRIVERS)) {
                 driverResource.createDriver(request.getBody());
                 response.setStatus(HttpStatus.CREATED);
+            } else if (request.isEqualsPath(CarResource.CARS) {
+                carResource.createCar(request.getBody());
+                response.setStatus(HttpStatus.CREATED);
             } else {
                 throw new RequestInvalidException(request.getPath());
             }

@@ -4,4 +4,9 @@ import java.util.List;
 
 public class CarResource {
 
+    public void createCar(String body) {
+        // TODO Auto-generated method stub
+        
+    }
+
 }
