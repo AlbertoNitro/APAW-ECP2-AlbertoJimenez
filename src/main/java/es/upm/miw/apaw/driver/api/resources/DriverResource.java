@@ -38,9 +38,8 @@ public class DriverResource {
         return optional.orElseThrow(() -> new DriverIdNotFoundException(Integer.toString(driverId)));
     }
 
-    public Object deleteDriver(Integer valueOf) {
-        // TODO Auto-generated method stub
-        return null;
+    public boolean deleteDriver(Integer driverId) {
+        return new DriverController().deleteDriver(driverId);
     }
 
 }

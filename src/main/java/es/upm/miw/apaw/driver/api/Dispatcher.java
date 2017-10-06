@@ -2,6 +2,7 @@ package es.upm.miw.apaw.driver.api;
 
 import es.upm.miw.apaw.driver.api.resources.DriverResource;
 import es.upm.miw.apaw.driver.api.resources.CarResource;
+import es.upm.miw.apaw.driver.api.resources.exceptions.DriverIdNotFoundException;
 import es.upm.miw.apaw.driver.api.resources.exceptions.RequestInvalidException;
 import es.upm.miw.apaw.driver.http.HttpRequest;
 import es.upm.miw.apaw.driver.http.HttpResponse;
@@ -65,7 +66,9 @@ public class Dispatcher {
     public void doDelete(HttpRequest request, HttpResponse response) {
         try {
             if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
-                response.setBody(driverResource.deleteDriver(Integer.valueOf(request.paths()[1])).toString());
+               boolean resultado = driverResource.deleteDriver(Integer.valueOf(request.paths()[1]));
+               if (!resultado)
+                   new DriverIdNotFoundException(Integer.toString(Integer.valueOf(request.paths()[1])));
             } else {
                 throw new RequestInvalidException(request.getPath());
             }

@@ -32,4 +32,9 @@ public class DriverController {
         }
     }
 
+    public boolean deleteDriver(Integer driverId) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }
