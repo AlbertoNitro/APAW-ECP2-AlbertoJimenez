@@ -33,7 +33,6 @@ public class CarResourceFunctionalTesting {
     public void testCreateCar() {
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(CarResource.CARS).body("1").build();
         assertEquals(HttpStatus.CREATED, new HttpClientService().httpRequest(request).getStatus());
-
     }
 
     @Test(expected = HttpException.class)
