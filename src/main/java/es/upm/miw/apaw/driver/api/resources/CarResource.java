@@ -23,4 +23,9 @@ public class CarResource {
         }
     }
 
+    public Object readCar(Integer valueOf) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
