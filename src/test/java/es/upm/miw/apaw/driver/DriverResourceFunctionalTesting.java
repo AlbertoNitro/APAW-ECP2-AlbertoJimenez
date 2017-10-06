@@ -89,5 +89,27 @@ public class DriverResourceFunctionalTesting {
         new HttpClientService().httpRequest(request).getBody();
     }
     
+    @Test(expected = HttpException.class)
+    public void testDeleteDriverInvalid() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("55").build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+    
+    @Test(expected = HttpException.class)
+    public void testDeleteDriver() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
+        new HttpClientService().httpRequest(request).getBody();
+        request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
+        
+    }
+    
+    @Test(expected = HttpException.class)
+    public void testDeleteWithoutDriverId() {
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(DriverResource.DRIVERS).build();
+        new HttpClientService().httpRequest(request);
+    }
+    
     
 }
