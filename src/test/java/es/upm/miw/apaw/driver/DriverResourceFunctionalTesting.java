@@ -82,11 +82,15 @@ public class DriverResourceFunctionalTesting {
         new HttpClientService().httpRequest(request).getBody();
     }
     
-    @Test(expected = HttpException.class)
+    @Test
     public void testUpdatePhoneDriver() {
         this.createDriver();
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").body("665129265").build();
-        new HttpClientService().httpRequest(request).getBody();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
+        assertEquals("{\"id\":1,\"phone\":\"0\"}", new HttpClientService().httpRequest(request).getBody());
+        HttpRequest request2 = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").body("665129265").build();
+        new HttpClientService().httpRequest(request2).getBody();
+        HttpRequest request3 = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
+        assertEquals("{\"id\":1,\"phone\":\"665129265\"}", new HttpClientService().httpRequest(request3).getBody());
     }
     
     @Test(expected = HttpException.class)
@@ -100,15 +104,16 @@ public class DriverResourceFunctionalTesting {
     public void testDeleteDriver() {
         this.createDriver();
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
-        new HttpClientService().httpRequest(request).getBody();
-        request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
-        
+        new HttpClientService().httpRequest(request).getBody(); 
+        HttpRequest request2 = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
+        new HttpClientService().httpRequest(request2).getBody(); 
     }
     
     @Test(expected = HttpException.class)
     public void testDeleteWithoutDriverId() {
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(DriverResource.DRIVERS).build();
-        new HttpClientService().httpRequest(request);
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.DELETE).path(DriverResource.DRIVERS).path(DriverResource.ID).build();
+        new HttpClientService().httpRequest(request).getBody();
     }
     
     

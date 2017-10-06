@@ -66,9 +66,10 @@ public class Dispatcher {
     public void doDelete(HttpRequest request, HttpResponse response) {
         try {
             if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
-               boolean resultado = driverResource.deleteDriver(Integer.valueOf(request.paths()[1]));
+                int driverId = Integer.valueOf(request.paths()[1]);
+               boolean resultado = driverResource.deleteDriver(driverId);
                if (!resultado)
-                   new DriverIdNotFoundException(Integer.toString(Integer.valueOf(request.paths()[1])));
+                   throw new DriverIdNotFoundException(Integer.toString(driverId));
             } else {
                 throw new RequestInvalidException(request.getPath());
             }

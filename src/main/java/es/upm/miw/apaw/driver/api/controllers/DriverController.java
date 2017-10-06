@@ -33,8 +33,12 @@ public class DriverController {
     }
 
     public boolean deleteDriver(Integer driverId) {
-        // TODO Auto-generated method stub
-        return false;
+        if (existDriverId(driverId)) {
+           DaoFactory.getFactory().getDriverDao().deleteById(driverId);
+           return true;
+        } else {
+            return false;
+        }
     }
 
 }
