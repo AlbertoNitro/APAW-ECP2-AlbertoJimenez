@@ -19,12 +19,12 @@ public class DriverDaoMemoryTest {
     }
 
     @Test
-    public void testReadTheme() {
+    public void testReadDriver() {
         assertEquals(1, DaoFactory.getFactory().getDriverDao().read(1).getId());
     }
 
     @Test
-    public void testReadNonExistId() {
+    public void testReadDriverNonExistId() {
         assertNull(DaoFactory.getFactory().getDriverDao().read(2));
     }
     
