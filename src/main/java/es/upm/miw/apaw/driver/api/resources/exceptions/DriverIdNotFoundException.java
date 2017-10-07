@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class DriverIdNotFoundException extends Exception implements Serializable {
     private static final long serialVersionUID = -6612873371829112749L;
 
-    public static final String DESCRIPTION = "El id del conductor no existe";
+    public static final String DESCRIPTION = "El identificador del conductor no existe";
 
     public DriverIdNotFoundException(String detail) {
         super(DESCRIPTION + ". " + detail);
