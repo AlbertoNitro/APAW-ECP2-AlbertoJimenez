@@ -18,4 +18,16 @@ public class CarControllerIT {
         carController.createCar(1);
     }
 
+    @Test
+    public void testReadCar() {
+        assertEquals(1, carController.readCar(1).get().getId());
+    }
+
+    @Test
+    public void testReadCarNonExistId() {
+        assertFalse(carController.readCar(2).isPresent());
+    }
 }
+
+
+

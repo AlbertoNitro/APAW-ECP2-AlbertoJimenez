@@ -17,7 +17,7 @@ public class CarDaoMemoryTest {
     public void before() {
         DaoFactory.setFactory(new DaoMemoryFactory());
         this.car = new CarBuilder().id(1).model("Renault Megane").build();
-        DaoFactory.getFactory().getCarDao().create(car);
+        DaoFactory.getFactory().getCarDao().create(this.car);
     }
     
     @Test

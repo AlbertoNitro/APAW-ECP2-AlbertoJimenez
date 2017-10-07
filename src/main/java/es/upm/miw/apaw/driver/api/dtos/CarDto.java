@@ -44,6 +44,6 @@ public class CarDto {
     
     @Override
     public String toString() {
-        return "{\"id\":" + id + ",\"model\":\"" + model + ",\"registration\":\"" + registration + "\"}";
+        return "{\"id\":" + id + ",\"model\":\"" + model + ",\"registration\":\"" + model + "\"}";
     }
 }
