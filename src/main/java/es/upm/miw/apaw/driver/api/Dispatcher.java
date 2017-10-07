@@ -21,11 +21,12 @@ public class Dispatcher {
 
     public void doGet(HttpRequest request, HttpResponse response) {
         try {
+            String id = request.paths()[1];
             if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
-                response.setBody(driverResource.readDriver(Integer.valueOf(request.paths()[1])).toString());
+                response.setBody(driverResource.readDriver(id).toString());
                 response.setStatus(HttpStatus.OK);
             } else if (request.isEqualsPath(CarResource.CARS + CarResource.ID)) {
-                response.setBody(carResource.readCar(Integer.valueOf(request.paths()[1])).toString());
+                response.setBody(carResource.readCar(id).toString());
                 response.setStatus(HttpStatus.OK);
             } else {
                 throw new RequestInvalidException(request.getPath());
@@ -59,9 +60,9 @@ public class Dispatcher {
     public void doPatch(HttpRequest request, HttpResponse response) {
         try {
             if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
-                int driverId = Integer.valueOf(request.paths()[1]);
-                long phoneDriver = Long.valueOf(request.getBody());     
-                response.setBody(driverResource.updatePhoneDriver(driverId, phoneDriver).toString());
+                String driverId = request.paths()[1];
+                String driverPhone = request.getBody();
+                response.setBody(driverResource.updatePhoneDriver(driverId, driverPhone).toString());
                 response.setStatus(HttpStatus.OK);
             } else {
                 throw new RequestInvalidException(request.getPath());
@@ -74,13 +75,13 @@ public class Dispatcher {
     public void doDelete(HttpRequest request, HttpResponse response) {
         try {
             if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
-                int driverId = Integer.valueOf(request.paths()[1]);
-               boolean resultado = driverResource.deleteDriver(driverId);
-               if (!resultado)
-                   throw new DriverIdNotFoundException(Integer.toString(driverId));
-               else {
-                   response.setStatus(HttpStatus.OK);
-               }
+                String driverId = request.paths()[1];
+                boolean success = driverResource.deleteDriver(driverId);
+                if (!success)
+                    throw new DriverIdNotFoundException(driverId);
+                else {
+                    response.setStatus(HttpStatus.OK);
+                }
             } else {
                 throw new RequestInvalidException(request.getPath());
             }

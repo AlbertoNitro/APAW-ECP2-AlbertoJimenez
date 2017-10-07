@@ -3,14 +3,12 @@ package es.upm.miw.apaw.driver;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
-import org.junit.Rule;
+
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import es.upm.miw.apaw.driver.api.daos.DaoFactory;
 import es.upm.miw.apaw.driver.api.daos.memory.DaoMemoryFactory;
 import es.upm.miw.apaw.driver.api.resources.CarResource;
-import es.upm.miw.apaw.driver.api.resources.DriverResource;
 import es.upm.miw.apaw.driver.http.HttpClientService;
 import es.upm.miw.apaw.driver.http.HttpException;
 import es.upm.miw.apaw.driver.http.HttpMethod;
@@ -46,12 +44,14 @@ public class CarResourceFunctionalTesting {
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(CarResource.CARS).build();
         new HttpClientService().httpRequest(request);
     }
-    
+
     @Test
     public void testReadCar() {
         this.createCar();
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(CarResource.CARS).path(CarResource.ID).expandPath("1").build();
-        assertEquals("{\"id\":1,\"model\":\"Renault Megane\",\"registration\":\"null\"}", new HttpClientService().httpRequest(request).getBody());
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(CarResource.CARS).path(CarResource.ID).expandPath("1")
+                .build();
+        assertEquals("{\"id\":\"1\",\"model\":\"Renault Megane\",\"registration\":\"null\"}",
+                new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test(expected = HttpException.class)
