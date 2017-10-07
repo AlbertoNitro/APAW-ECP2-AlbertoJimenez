@@ -27,7 +27,7 @@ public class CarDto {
     }
     
     public String getModel() {
-        return model;
+        return this.model;
     }
 
     public void setId(int id) {
@@ -44,6 +44,6 @@ public class CarDto {
     
     @Override
     public String toString() {
-        return "{\"id\":" + id + ",\"model\":\"" + model + ",\"registration\":\"" + model + "\"}";
+        return "{\"id\":" + id + ",\"model\":\"" + model + "\",\"registration\":\"" + registration + "\"}";
     }
 }
