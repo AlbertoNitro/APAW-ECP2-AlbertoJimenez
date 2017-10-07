@@ -24,6 +24,9 @@ public class Dispatcher {
             if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
                 response.setBody(driverResource.readDriver(Integer.valueOf(request.paths()[1])).toString());
                 response.setStatus(HttpStatus.OK);
+            } else if (request.isEqualsPath(CarResource.CARS + CarResource.ID)) {
+                response.setBody(carResource.readCar(Integer.valueOf(request.paths()[1])).toString());
+                response.setStatus(HttpStatus.OK);
             } else {
                 throw new RequestInvalidException(request.getPath());
             }

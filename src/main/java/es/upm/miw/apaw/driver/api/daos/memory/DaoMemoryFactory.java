@@ -7,6 +7,8 @@ import es.upm.miw.apaw.driver.api.daos.DriverDao;
 public class DaoMemoryFactory extends DaoFactory {
 
     private DriverDao driverDao;
+    
+    private CarDao carDao;
 
     @Override
     public DriverDao getDriverDao() {
@@ -18,8 +20,10 @@ public class DaoMemoryFactory extends DaoFactory {
 
     @Override
     public CarDao getCarDao() {
-        // TODO Auto-generated method stub
-        return null;
+        if (carDao == null) {
+            carDao = new CarDaoMemory();
+        }
+        return carDao;
     }
 
 }

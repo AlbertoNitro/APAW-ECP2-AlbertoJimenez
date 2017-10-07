@@ -1,7 +1,11 @@
 package es.upm.miw.apaw.driver.api.resources;
 
-import es.upm.miw.apaw.driver.api.controllers.DriverController;
+import java.util.Optional;
+
+import es.upm.miw.apaw.driver.api.controllers.CarController;
+import es.upm.miw.apaw.driver.api.dtos.CarDto;
 import es.upm.miw.apaw.driver.api.resources.exceptions.CarIdInvalidException;
+import es.upm.miw.apaw.driver.api.resources.exceptions.CarIdNotFoundException;
 
 public class CarResource {
 
@@ -12,7 +16,7 @@ public class CarResource {
     public void createCar(String carId) throws CarIdInvalidException {
         this.validateId(carId);
         int id = Integer.parseInt(carId);
-        new DriverController().createDriver(id);
+        new CarController().createCar(id);
     }
 
     private void validateId(String carId) throws CarIdInvalidException {
@@ -21,6 +25,11 @@ public class CarResource {
         } catch (Exception e) {
             throw new CarIdInvalidException(carId);
         }
+    }
+
+    public CarDto readCar(int carId) throws CarIdNotFoundException {
+        Optional<CarDto> optional = new CarController().readCar(carId);
+        return optional.orElseThrow(() -> new CarIdNotFoundException(Integer.toString(carId)));
     }
 
 }
