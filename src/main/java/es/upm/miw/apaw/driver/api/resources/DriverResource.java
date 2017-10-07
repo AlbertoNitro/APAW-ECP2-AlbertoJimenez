@@ -15,10 +15,20 @@ public class DriverResource {
 
     public static final String ID = "/{id}";
 
-    public void createDriver(String driverId) throws DriverIdInvalidException, FieldNullOrEmptyException {
+    public void createDriver(String body) throws DriverIdInvalidException, FieldNullOrEmptyException, DriverPhoneInvalidException {
+        String driverId = "";
+        String driverPhone = "";
+        try {
+            driverId = body.split(":")[0];
+            driverPhone = body.split(":")[1];
+        } catch (Exception e){
+            throw new FieldNullOrEmptyException();
+        }
         this.validateId(driverId);
+        this.validatePhone(driverPhone);
         int id = Integer.parseInt(driverId);
-        new DriverController().createDriver(id);
+        long phone = Long.parseLong(driverPhone);
+        new DriverController().createDriver(id, phone);
     }
 
     public DriverDto readDriver(String driverId) throws DriverIdNotFoundException, DriverIdInvalidException, FieldNullOrEmptyException {

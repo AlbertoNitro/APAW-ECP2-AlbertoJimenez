@@ -9,7 +9,7 @@ import es.upm.miw.apaw.driver.api.entities.CarBuilder;
 public class CarController {
 
     public void createCar(int carId) {
-        DaoFactory.getFactory().getCarDao().create(new CarBuilder().id(1).model("Renault Megane").build());
+        DaoFactory.getFactory().getCarDao().create(new CarBuilder().id(carId).model("Renault Megane").build());
     }
 
     private boolean existCarId(int carId) {

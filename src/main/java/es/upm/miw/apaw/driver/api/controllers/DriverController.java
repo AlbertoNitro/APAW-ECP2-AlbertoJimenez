@@ -4,12 +4,12 @@ import java.util.Optional;
 
 import es.upm.miw.apaw.driver.api.daos.DaoFactory;
 import es.upm.miw.apaw.driver.api.dtos.DriverDto;
-import es.upm.miw.apaw.driver.api.entities.Driver;
+import es.upm.miw.apaw.driver.api.entities.DriverBuilder;
 
 public class DriverController {
 
-    public void createDriver(int driverId) {
-        DaoFactory.getFactory().getDriverDao().create(new Driver(driverId));
+    public void createDriver(int driverId, long driverPhone) {
+        DaoFactory.getFactory().getDriverDao().create(new DriverBuilder().id(driverId).phone(driverPhone).build());
     }
 
     private boolean existDriverId(int driverId) {

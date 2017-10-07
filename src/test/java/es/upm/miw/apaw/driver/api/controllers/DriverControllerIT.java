@@ -16,12 +16,13 @@ public class DriverControllerIT {
     public void before() {
         DaoFactory.setFactory(new DaoMemoryFactory());
         driverController = new DriverController();
-        driverController.createDriver(1);
+        driverController.createDriver(1, 665129266);
     }
 
     @Test
     public void testReadDriver() {
         assertEquals(1, driverController.readDriver(1).get().getId());
+        assertEquals(665129266, driverController.readDriver(1).get().getPhone());
     }
 
     @Test
