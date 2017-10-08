@@ -23,13 +23,13 @@ public class CarResourceFunctionalTesting {
     }
 
     private void createCar() {
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(CarResource.CARS).body("1").build();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(CarResource.CARS).body("1:Renault Megane:1184CPL").build();
         new HttpClientService().httpRequest(request);
     }
 
     @Test
     public void testCreateCar() {
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(CarResource.CARS).body("1").build();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(CarResource.CARS).body("1:Renault Megane:1184CPL").build();
         assertEquals(HttpStatus.CREATED, new HttpClientService().httpRequest(request).getStatus());
     }
 
@@ -50,7 +50,7 @@ public class CarResourceFunctionalTesting {
         this.createCar();
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(CarResource.CARS).path(CarResource.ID).expandPath("1")
                 .build();
-        assertEquals("{\"id\":\"1\",\"model\":\"Renault Megane\",\"registration\":\"null\"}",
+        assertEquals("{\"id\":\"1\",\"model\":\"Renault Megane\",\"registration\":\"1184CPL\"}",
                 new HttpClientService().httpRequest(request).getBody());
     }
 

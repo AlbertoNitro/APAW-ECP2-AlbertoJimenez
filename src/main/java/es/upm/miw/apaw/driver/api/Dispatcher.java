@@ -59,7 +59,7 @@ public class Dispatcher {
 
     public void doPatch(HttpRequest request, HttpResponse response) {
         try {
-            if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID)) {
+            if (request.isEqualsPath(DriverResource.DRIVERS + DriverResource.ID + DriverResource.PHONE)) {
                 String driverId = request.paths()[1];
                 String driverPhone = request.getBody();
                 response.setBody(driverResource.updatePhoneDriver(driverId, driverPhone).toString());

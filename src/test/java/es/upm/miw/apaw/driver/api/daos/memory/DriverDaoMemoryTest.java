@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import es.upm.miw.apaw.driver.api.daos.DaoFactory;
 import es.upm.miw.apaw.driver.api.entities.Driver;
+import es.upm.miw.apaw.driver.api.entities.DriverBuilder;
 
 public class DriverDaoMemoryTest {
     private Driver driver;
@@ -14,13 +15,14 @@ public class DriverDaoMemoryTest {
     @Before
     public void before() {
         DaoFactory.setFactory(new DaoMemoryFactory());
-        this.driver = new Driver(1);
+        this.driver = new DriverBuilder().id(1).phone(665129266).build();
         DaoFactory.getFactory().getDriverDao().create(driver);
     }
 
     @Test
     public void testReadDriver() {
         assertEquals(1, DaoFactory.getFactory().getDriverDao().read(1).getId());
+        assertEquals(665129266, DaoFactory.getFactory().getDriverDao().read(1).getPhone());
     }
 
     @Test

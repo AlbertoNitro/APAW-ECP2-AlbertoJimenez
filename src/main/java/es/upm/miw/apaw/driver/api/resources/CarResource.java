@@ -14,10 +14,22 @@ public class CarResource {
 
     public static final String ID = "/{id}";
 
-    public void createCar(String carId) throws CarIdInvalidException, FieldNullOrEmptyException {
-        this.validateId(carId);
+    public void createCar(String body) throws CarIdInvalidException, FieldNullOrEmptyException {
+        String carId = "";
+        String carRegistration = "";
+        String carModel = "";
+        try {
+            carId = body.split(":")[0];
+            carModel = body.split(":")[1];
+            carRegistration = body.split(":")[2];
+            this.validateId(carId);
+            this.validateField(carRegistration);
+            this.validateField(carModel);
+        } catch (Exception e) {
+            throw new FieldNullOrEmptyException();
+        }
         int id = Integer.parseInt(carId);
-        new CarController().createCar(id);
+        new CarController().createCar(id, carModel, carRegistration);
     }
 
     public CarDto readCar(String carId) throws CarIdNotFoundException, CarIdInvalidException, FieldNullOrEmptyException {
@@ -35,7 +47,7 @@ public class CarResource {
         }
         this.validateField(carId);
     }
-    
+
     private void validateField(String field) throws FieldNullOrEmptyException {
         if (field == null || field.isEmpty()) {
             throw new FieldNullOrEmptyException(field);
