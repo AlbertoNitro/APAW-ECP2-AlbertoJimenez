@@ -14,6 +14,8 @@ public class DriverResource {
     public static final String DRIVERS = "drivers";
 
     public static final String ID = "/{id}";
+    
+    public static final String PHONE = "/phone";
 
     public void createDriver(String body) throws DriverIdInvalidException, FieldNullOrEmptyException, DriverPhoneInvalidException {
         String driverId = "";

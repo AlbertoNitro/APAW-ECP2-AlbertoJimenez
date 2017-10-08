@@ -16,13 +16,15 @@ public class CarDaoMemoryTest {
     @Before
     public void before() {
         DaoFactory.setFactory(new DaoMemoryFactory());
-        this.car = new CarBuilder().id(1).model("Renault Megane").build();
+        this.car = new CarBuilder().id(1).model("Renault Megane").registration("1184CPL").build();
         DaoFactory.getFactory().getCarDao().create(this.car);
     }
     
     @Test
     public void testReadCar() {
         assertEquals(1, DaoFactory.getFactory().getCarDao().read(1).getId());
+        assertEquals("Renault Megane", DaoFactory.getFactory().getCarDao().read(1).getModel());
+        assertEquals("1184CPL", DaoFactory.getFactory().getCarDao().read(1).getRegistration());
     }
 
     @Test

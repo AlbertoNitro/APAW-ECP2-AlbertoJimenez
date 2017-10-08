@@ -45,7 +45,7 @@ public class DriverResourceFunctionalTesting {
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(DriverResource.DRIVERS).build();
         new HttpClientService().httpRequest(request);
     }
-    
+
     @Test(expected = HttpException.class)
     public void testCreateWithoutDriverPhone() {
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.POST).path(DriverResource.DRIVERS).body("1:fgfdfggdf").build();
@@ -55,14 +55,17 @@ public class DriverResourceFunctionalTesting {
     @Test
     public void testReadDriver() {
         this.createDriver();
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").build();
-        assertEquals("{\"id\":\"1\",\"phone\":\"665129266\",\"reference\":\"null\",\"level\":\"BEGINNER\",\"car\":\"null\"}", new HttpClientService().httpRequest(request).getBody());
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID)
+                .expandPath("1").build();
+        assertEquals("{\"id\":\"1\",\"phone\":\"665129266\",\"reference\":\"null\",\"level\":\"BEGINNER\",\"car\":\"null\"}",
+                new HttpClientService().httpRequest(request).getBody());
     }
 
     @Test(expected = HttpException.class)
     public void testReadDriverIdEmpty() {
         this.createDriver();
-        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID).build();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID)
+                .path(DriverResource.PHONE).build();
         new HttpClientService().httpRequest(request).getBody();
     }
 
@@ -70,21 +73,23 @@ public class DriverResourceFunctionalTesting {
     public void testUpdatePhoneDriverIdNotFound() {
         this.createDriver();
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID)
-                .expandPath("33").body("665129265").build();
+                .path(DriverResource.PHONE).expandPath("33").body("665129265").build();
         new HttpClientService().httpRequest(request).getBody();
     }
-
-    /*
-     * @Test(expected = HttpException.class) public void testUpdatePhoneDriverEmpty() { this.createDriver(); HttpRequest request = new
-     * HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID).expandPath("1").body("").build();
-     * new HttpClientService().httpRequest(request).getBody(); }
-     */
 
     @Test(expected = HttpException.class)
     public void testUpdatePhoneDriverInvalid() {
         this.createDriver();
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID)
-                .expandPath("1").body("fgfgfghghj").build();
+                .path(DriverResource.PHONE).body("fgfgfghghj").build();
+        new HttpClientService().httpRequest(request).getBody();
+    }
+
+    @Test(expected = HttpException.class)
+    public void testUpdatePhoneInvalid() {
+        this.createDriver();
+        HttpRequest request = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID)
+                .path(DriverResource.PHONE).expandPath("1").body("fgfgfghghj").build();
         new HttpClientService().httpRequest(request).getBody();
     }
 
@@ -93,13 +98,15 @@ public class DriverResourceFunctionalTesting {
         this.createDriver();
         HttpRequest request = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID)
                 .expandPath("1").build();
-        assertEquals("{\"id\":\"1\",\"phone\":\"665129266\",\"reference\":\"null\",\"level\":\"BEGINNER\",\"car\":\"null\"}", new HttpClientService().httpRequest(request).getBody());
+        assertEquals("{\"id\":\"1\",\"phone\":\"665129266\",\"reference\":\"null\",\"level\":\"BEGINNER\",\"car\":\"null\"}",
+                new HttpClientService().httpRequest(request).getBody());
         HttpRequest request2 = new HttpRequestBuilder().method(HttpMethod.PATCH).path(DriverResource.DRIVERS).path(DriverResource.ID)
-                .expandPath("1").body("665129265").build();
+                .path(DriverResource.PHONE).expandPath("1").body("665129265").build();
         new HttpClientService().httpRequest(request2).getBody();
         HttpRequest request3 = new HttpRequestBuilder().method(HttpMethod.GET).path(DriverResource.DRIVERS).path(DriverResource.ID)
                 .expandPath("1").build();
-        assertEquals("{\"id\":\"1\",\"phone\":\"665129265\",\"reference\":\"null\",\"level\":\"BEGINNER\",\"car\":\"null\"}", new HttpClientService().httpRequest(request3).getBody());
+        assertEquals("{\"id\":\"1\",\"phone\":\"665129265\",\"reference\":\"null\",\"level\":\"BEGINNER\",\"car\":\"null\"}",
+                new HttpClientService().httpRequest(request3).getBody());
     }
 
     @Test(expected = HttpException.class)
